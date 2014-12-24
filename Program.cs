@@ -16,7 +16,7 @@ namespace SharpMC
         static void Main(string[] args)
         {
             Console.WriteLine("#############################");
-            Console.WriteLine("#   SHARP MineCraft 1.0.0   #");
+            Console.WriteLine("#       SharpMC 1.0.0       #");
             Console.WriteLine("#       Minecraft 1.8       #");
             Console.WriteLine("#     Written by Kennyvv    #");
             Console.WriteLine("#############################");
@@ -24,7 +24,7 @@ namespace SharpMC
             Thread serverThread = new Thread(() => new Server().ListenForClients());
             serverThread.Start();
 
-            Console.Title = "SharpCraft Server 1.0.0 - By Kennyvv/Wuppie";
+            Console.Title = "SharpMC Server 1.0.0 - By Kennyvv/Wuppie";
         }
     }
 
@@ -34,10 +34,10 @@ namespace SharpMC
        // public static Thread _listenThread;
         public static int ProtocolVersion = 47;
         public static string ProtocolName = "1.8";
-        private static string Title = "Sharpcraft";
+        private static string Title = "SharpMC";
         public static bool isDebug = false;
 
-        public static string ServerMOTD = "SharpCraft - By Kennyvv/Wuppie";
+        public static string ServerMOTD = "SharpMC - By Kennyvv/Wuppie";
         public static int PlayerOnline = 0;
         public static int PlayersMax = 250;
         public static List<Player> Players = new List<Player>();

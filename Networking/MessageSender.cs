@@ -15,12 +15,19 @@ namespace SharpMC.Networking
             //{
              //   actData.Add(Data[i]);
            // }
-            tcpClient.NoDelay = false;
+            try
+            {
+                tcpClient.NoDelay = false;
                 NetworkStream clientStream = tcpClient.GetStream();
-              
+
                 clientStream.Write(Data, 0, Data.Length);
                 clientStream.Flush();
 
+            }
+            catch(Exception ex)
+            {
+                ConsoleFunctions.WriteErrorLine("FUCK, We failed to send a packet... The following error occured: " + ex.Message);
+            }
                 ConsoleFunctions.WriteDebugLine("Packet send with Packet ID: " + Data[1]);
                 ConsoleFunctions.WriteDebugLine("Packet send with Packet Length: " + Data[0]);
                 ConsoleFunctions.WriteDebugLine("Actual packet length: " + Data.Length);
