@@ -9,7 +9,8 @@ Used Library's
 ==============
 I try not to use them, but sometimes i kinda have too haha.
 - <a href="https://github.com/SirCmpwn/Craft.Net">Craft.net</a> - For terrain generation and chunk management.
-- <a href="https://github.com/fragmer/fNbt">fNbt</a> - Dependicy for Craft.net
+- <a href="https://github.com/fragmer/fNbt">fNbt</a> - Dependency for Craft.net
+- <a href="http://www.bouncycastle.org/csharp/">BouncyCastle</a> - Dependency for Craft.net & Encryption on Mono.
 
 Licensing
 =========
