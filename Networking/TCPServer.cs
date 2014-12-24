@@ -17,13 +17,10 @@ namespace SharpMC.Networking
             ConsoleFunctions.WriteServerLine("Ready for connections...");
             while (true)
             {
-                //blocks until a client has connected to the server
                 TcpClient client = Globals._ServerListener.AcceptTcpClient();
-                ConsoleFunctions.WriteServerLine("A new connection has been made!");
+                ConsoleFunctions.WriteDebugLine("A new connection has been made!");
                 Globals.ActiveConnections++;
 
-                //create a thread to handle communication 
-                //with connected client
                 Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClientCommNew));
                 clientThread.Start(client);
             }
@@ -34,6 +31,7 @@ namespace SharpMC.Networking
             TcpClient tcpClient = (TcpClient)client;
             NetworkStream clientStream = tcpClient.GetStream();
 
+            //Buffer size of 4096 Bytes, reason: I guess we don't need more?
             byte[] message = new byte[4096];
             int bytesRead;
             while (true)
@@ -117,146 +115,4 @@ namespace SharpMC.Networking
         }
 
     }
-    
-
-    #region NOPE!
-    class TcpServerV2
-    {
-        ManualResetEvent tcpClientConnected = new ManualResetEvent(false);
-        void ProcessIncomingData(object obj)
-        {
-            TcpClient client = (TcpClient)obj;
-          //  StringBuilder sb = new StringBuilder();
-            List<byte> d = new List<byte>();
-            Byte[] Data = new Byte[4096];
-           
-            using (NetworkStream stream = client.GetStream())
-            {
-                if (stream.DataAvailable)
-                {
-                    stream.Read(Data, 0, 4096);
-                }
-
-                if (Data.Length > 0)
-                {
-                    //We actually received Data here!
-                    int Length = Data[2];
-                    int ourLength = Data.Length;
-                  //  ConsoleFunctions.WriteDebugLine(ourLength + "/" + Length);
-
-                    PacketHandler.PacketHandler PH = new PacketHandler.PacketHandler();
-                    Thread handler = new Thread(() => PH.HandlePacket(client, Data));
-                    handler.Start();
-
-                }
-            }
-        }
-
-        void ProcessIncomingConnection(IAsyncResult ar)
-        {
-            TcpListener listener = (TcpListener)ar.AsyncState;
-            TcpClient client = listener.EndAcceptTcpClient(ar);
-
-            ThreadPool.QueueUserWorkItem(ProcessIncomingData, client);
-            tcpClientConnected.Set();
-        }
-
-        public void start(int Port)
-        {
-            IPEndPoint endpoint = new IPEndPoint(IPAddress.Any, Port);
-            TcpListener listener = new TcpListener(endpoint);
-            listener.Start();
-
-            while (true)
-            {
-                tcpClientConnected.Reset();
-                listener.BeginAcceptTcpClient(new AsyncCallback(ProcessIncomingConnection), listener);
-                tcpClientConnected.WaitOne();
-            }
-        }
-    }
-
-    #endregion
-
-    #region AlsoNope
-    class TcpServer
-    {
-        private PacketHandler.PacketHandler PH = new PacketHandler.PacketHandler();
-        private TcpListener _server;
-        private Boolean _isRunning;
-
-        public TcpServer(int port)
-        {
-            _server = new TcpListener(IPAddress.Any, port);
-            _server.Start();
-
-            _isRunning = true;
-
-            Thread ClientLoop = new Thread(() => LoopClients());
-            ClientLoop.Start();
-            ConsoleFunctions.WriteServerLine("TCP Server started!");
-            //LoopClients();
-        }
-
-        public void LoopClients()
-        {
-            while (_isRunning)
-            {
-                // wait for client connection
-                TcpClient newClient = _server.AcceptTcpClient();
-
-                // client found.
-                // create a thread to handle communication
-                Thread t = new Thread(new ParameterizedThreadStart(HandleClient));
-                t.Start(newClient);
-            }
-        }
-
-        public void HandleClient(object obj)
-        {
-            // retrieve client from parameter passed to thread
-            TcpClient client = (TcpClient)obj;
-
-            // sets two streams
-          //  StreamWriter sWriter = new StreamWriter(client.GetStream(), Encoding.UTF8);
-          //  StreamReader sReader = new StreamReader(client.GetStream(), Encoding.UTF8);
-            NetworkStream clientStream = client.GetStream();
-            
-            //Boolean bClientConnected = true;
-            // sData = null;
-            int Received = 0;
-            byte[] Buffer = new byte[4 * 1024];
-            while (client.Connected)
-            {
-                //Wait for first data...
-                ConsoleFunctions.WriteDebugLine("Waiting for data...");
-                try
-                {
-                    Received = clientStream.Read(Buffer, 0, (4 * 1024));
-                }
-                catch(Exception ex)
-                {
-                    ConsoleFunctions.WriteErrorLine("We had an error! \n" + ex.Message);
-                }
-                if (Received == 0)
-                {
-                    //Our client disconnected, Handle it.
-                    ConsoleFunctions.WriteErrorLine("We received 0 bytes, did a client disconnect?");
-                    client.Close();
-                   // client.Close();
-                    return;
-                }
-
-                if (Received > 0)
-                {
-                    //We received actual data.
-                    //Lets handle it.
-                    Thread handler = new Thread(() => PH.HandlePacket(client, Buffer));
-                    handler.Start();
-                }
-            }
-            client.Close();
-        }
-    }
-    #endregion
 }

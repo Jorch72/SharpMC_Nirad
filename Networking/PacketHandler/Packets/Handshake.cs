@@ -20,28 +20,15 @@ namespace SharpMC.Networking.PacketHandler.Packets
         {
               TcpClient tcpClient = (TcpClient)Client;
 
-               // Console.Write("Handshake \n");
                 string Host = Encoding.UTF8.GetString(Data, 4, Data[3]);
                 ushort actualPort;
                 if (BitConverter.IsLittleEndian)
                     actualPort = BitConverter.ToUInt16(new byte[2] { (byte)Data[14], (byte)Data[13] }, 0);
                 else
                     actualPort = BitConverter.ToUInt16(new byte[2] { (byte)Data[13], (byte)Data[14] }, 0);
-                // NextState = message[16];
-           //     byte[] _HState = new byte[5];
-
-              //  Array.Copy(Data, 15, _HState, 0, 5);
-                
-               // Console.WriteLine(Data[0].ToString());
-               // int HandShakeState = Data[16];
                 try
                 {
-                  //  byte[] HandShake = new byte[5];
-                  ////  Array.Copy(Data, 15, HandShake, 0, 5);
-                   //// ulong HShakeState = VarintBitConverter.ToTarget(HandShake, 5);
-                    //Console.WriteLine(HShakeState.ToString());
                     int HandShakeState = Globals.v2Int32(Data, 15);
-                 //   Console.WriteLine(HandShakeState.ToString());
 
                     if (HandShakeState == 1)
                     {
@@ -61,17 +48,13 @@ namespace SharpMC.Networking.PacketHandler.Packets
         }
 
         private void LoginRequest(TcpClient tcpClient, byte[] Data)
-        {
-          //  string ReceivedUsername = Encoding.UTF8.GetString(Data, 2, Data[1]);
-        //    Console.WriteLine("Name: " + ReceivedUsername);
+        {   
             string Username = "kennyvv";
             byte[] _Username = Encoding.UTF8.GetBytes(Username);
 
             string UUID = Globals.getUUID(Username);
-//UUID = UUID.Insert(UUID.Length / 2, "-");
             Guid g = Guid.Parse(UUID);
             UUID = g.ToString();
-       //     Console.WriteLine("UUID for '"+ Username +"': " + UUID);
 
             SharpMC.Utils.PlayerHelper.addPlayer(new Player() { Username = Username, UUID = UUID, Gamemode = new Gamemode() { _Gamemode = 1 }, Position = new Position() { X = 0, Y = 0, Z = 50} });
 
@@ -85,7 +68,6 @@ namespace SharpMC.Networking.PacketHandler.Packets
             byte[] Response = Globals.concatBytes(TotalLength, PacketID, UUIDLength, _UUID, UsernameLength, _Username);
             Network.SendResponse(tcpClient, Response);
             
-           // PlayResponse(tcpClient, Data);
             CompressionLevel(tcpClient, Data);
             PlayResponse(tcpClient, Data);
             SpawnPositionResponse(tcpClient, Data);

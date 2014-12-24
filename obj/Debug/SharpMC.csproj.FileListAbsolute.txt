@@ -5,3 +5,6 @@ c:\users\elios\documents\visual studio 2013\Projects\SharpMC\SharpMC\obj\Debug\S
 c:\users\elios\documents\visual studio 2013\Projects\SharpMC\SharpMC\obj\Debug\SharpMC.pdb
 C:\Users\Elios\Documents\GitHub\SharpMC\obj\Debug\SharpMC.exe
 C:\Users\Elios\Documents\GitHub\SharpMC\obj\Debug\SharpMC.pdb
+C:\Users\Elios\Documents\GitHub\SharpMC\bin\Debug\SharpMC.exe
+C:\Users\Elios\Documents\GitHub\SharpMC\bin\Debug\SharpMC.pdb
+C:\Users\Elios\Documents\GitHub\SharpMC\obj\Debug\SharpMC.csprojResolveAssemblyReference.cache
