@@ -31,6 +31,14 @@ namespace SharpMC.Networking.PacketHandler
                     new PlayerPositionAndLook().Handle(Client, Data);
                     break;
 
+                case 0x03:
+                    new SharpMC.Networking.PacketHandler.Packets.Ingoing.PlayerOnGround().Handle(Client, Data);
+                    break;
+
+                case 0x05:
+                    new SharpMC.Networking.PacketHandler.Packets.Ingoing.PlayerLook().Handle(Client, Data);
+                    break;
+
                 default:
                   //  Console.WriteLine("[WARNING] Unknown packet received! ('" + PacketID + "')");
                     //Unknown packet received! ('" + PacketID + "')"

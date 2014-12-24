@@ -8,3 +8,6 @@ C:\Users\Elios\Documents\GitHub\SharpMC\obj\Debug\SharpMC.pdb
 C:\Users\Elios\Documents\GitHub\SharpMC\bin\Debug\SharpMC.exe
 C:\Users\Elios\Documents\GitHub\SharpMC\bin\Debug\SharpMC.pdb
 C:\Users\Elios\Documents\GitHub\SharpMC\obj\Debug\SharpMC.csprojResolveAssemblyReference.cache
+C:\Users\Elios\Documents\GitHub\SharpMC\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\Elios\Documents\GitHub\SharpMC\bin\Debug\nunit.framework.dll
+C:\Users\Elios\Documents\GitHub\SharpMC\bin\Debug\nunit.framework.xml

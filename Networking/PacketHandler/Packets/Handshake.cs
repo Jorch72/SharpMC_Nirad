@@ -72,7 +72,8 @@ namespace SharpMC.Networking.PacketHandler.Packets
             CompressionLevel(tcpClient, Data);
             PlayResponse(tcpClient, Data);
             SpawnPositionResponse(tcpClient, Data);
-            new PlayerAbilities().Handle(tcpClient, Data);
+            new Outgoing.PlayerAbilities().Handle(tcpClient, Data);
+            new Outgoing.PlayerPositionAndLook().Handle(tcpClient, Data);
         }
 
         private void CompressionLevel(TcpClient tcpClient, byte[] Data)

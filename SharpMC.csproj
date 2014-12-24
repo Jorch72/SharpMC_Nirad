@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,6 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto">
+      <HintPath>..\..\..\Downloads\bccrypto-net-1.7-bin\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\..\Downloads\fNbt-master (1)\fNbt-master\Dependencies\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,13 +49,89 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConsoleFunctions.cs" />
+    <Compile Include="Dependencies\Craft.Net.Anvil\BlockChangeEventArgs.cs" />
+    <Compile Include="Dependencies\Craft.Net.Anvil\Chunk.cs" />
+    <Compile Include="Dependencies\Craft.Net.Anvil\IDiskEntity.cs" />
+    <Compile Include="Dependencies\Craft.Net.Anvil\IWorldGenerator.cs" />
+    <Compile Include="Dependencies\Craft.Net.Anvil\Level.cs" />
+    <Compile Include="Dependencies\Craft.Net.Anvil\NibbleArray.cs" />
+    <Compile Include="Dependencies\Craft.Net.Anvil\Region.cs" />
+    <Compile Include="Dependencies\Craft.Net.Anvil\RuntimeInfo.cs" />
+    <Compile Include="Dependencies\Craft.Net.Anvil\Section.cs" />
+    <Compile Include="Dependencies\Craft.Net.Anvil\SpawnEntityEventArgs.cs" />
+    <Compile Include="Dependencies\Craft.Net.Anvil\TileEntity.cs" />
+    <Compile Include="Dependencies\Craft.Net.Anvil\UnrecognizedEntity.cs" />
+    <Compile Include="Dependencies\Craft.Net.Anvil\World.cs" />
+    <Compile Include="Dependencies\Craft.Net.Common\Biome.cs" />
+    <Compile Include="Dependencies\Craft.Net.Common\BlockFace.cs" />
+    <Compile Include="Dependencies\Craft.Net.Common\BoundingBox.cs" />
+    <Compile Include="Dependencies\Craft.Net.Common\Coordinates.cs" />
+    <Compile Include="Dependencies\Craft.Net.Common\Cryptography.cs" />
+    <Compile Include="Dependencies\Craft.Net.Common\Difficulty.cs" />
+    <Compile Include="Dependencies\Craft.Net.Common\Dimension.cs" />
+    <Compile Include="Dependencies\Craft.Net.Common\GameMode.cs" />
+    <Compile Include="Dependencies\Craft.Net.Common\GameRules.cs" />
+    <Compile Include="Dependencies\Craft.Net.Common\ItemStack.cs" />
+    <Compile Include="Dependencies\Craft.Net.Common\MathHelper.cs" />
+    <Compile Include="Dependencies\Craft.Net.Common\MetadataByte.cs" />
+    <Compile Include="Dependencies\Craft.Net.Common\MetadataDictionary.cs" />
+    <Compile Include="Dependencies\Craft.Net.Common\MetadataEntry.cs" />
+    <Compile Include="Dependencies\Craft.Net.Common\MetadataFloat.cs" />
+    <Compile Include="Dependencies\Craft.Net.Common\MetadataInt.cs" />
+    <Compile Include="Dependencies\Craft.Net.Common\MetadataShort.cs" />
+    <Compile Include="Dependencies\Craft.Net.Common\MetadataSlot.cs" />
+    <Compile Include="Dependencies\Craft.Net.Common\MetadataString.cs" />
+    <Compile Include="Dependencies\Craft.Net.Common\MinecraftStream.cs" />
+    <Compile Include="Dependencies\Craft.Net.Common\MinecraftStream.Stream.cs" />
+    <Compile Include="Dependencies\Craft.Net.Common\ParticleEffect.cs" />
+    <Compile Include="Dependencies\Craft.Net.Common\Ray.cs" />
+    <Compile Include="Dependencies\Craft.Net.Common\RuntimeInfo.cs" />
+    <Compile Include="Dependencies\Craft.Net.Common\Size.cs" />
+    <Compile Include="Dependencies\Craft.Net.Common\SoundEffect.cs" />
+    <Compile Include="Dependencies\Craft.Net.Common\Vector3.cs" />
+    <Compile Include="Dependencies\Craft.Net.TerrainGeneration\FlatlandGenerator.cs" />
+    <Compile Include="Dependencies\Craft.Net.TerrainGeneration\Noise.cs" />
+    <Compile Include="Dependencies\Craft.Net.TerrainGeneration\StandardGenerator.cs" />
     <Compile Include="Data\Gamemode.cs" />
     <Compile Include="Data\Player.cs" />
     <Compile Include="Data\Position.cs" />
+    <Compile Include="Dependencies\fNbt\InvalidReaderStateException.cs" />
+    <Compile Include="Dependencies\fNbt\JetBrains.Annotations.cs" />
+    <Compile Include="Dependencies\fNbt\NbtBinaryReader.cs" />
+    <Compile Include="Dependencies\fNbt\NbtBinaryWriter.cs" />
+    <Compile Include="Dependencies\fNbt\NbtCompression.cs" />
+    <Compile Include="Dependencies\fNbt\NbtFile.cs" />
+    <Compile Include="Dependencies\fNbt\NbtFormatException.cs" />
+    <Compile Include="Dependencies\fNbt\NbtParseState.cs" />
+    <Compile Include="Dependencies\fNbt\NbtReader.cs" />
+    <Compile Include="Dependencies\fNbt\NbtReaderNode.cs" />
+    <Compile Include="Dependencies\fNbt\NbtTagType.cs" />
+    <Compile Include="Dependencies\fNbt\Serialization\IgnoreOnNullAttribute.cs" />
+    <Compile Include="Dependencies\fNbt\Serialization\INbtSerializable.cs" />
+    <Compile Include="Dependencies\fNbt\Serialization\NbtIgnoreAttribute.cs" />
+    <Compile Include="Dependencies\fNbt\Serialization\NbtSerializer.cs" />
+    <Compile Include="Dependencies\fNbt\Serialization\TagNameAttribute.cs" />
+    <Compile Include="Dependencies\fNbt\TagSelector.cs" />
+    <Compile Include="Dependencies\fNbt\Tags\NbtByte.cs" />
+    <Compile Include="Dependencies\fNbt\Tags\NbtByteArray.cs" />
+    <Compile Include="Dependencies\fNbt\Tags\NbtCompound.cs" />
+    <Compile Include="Dependencies\fNbt\Tags\NbtDouble.cs" />
+    <Compile Include="Dependencies\fNbt\Tags\NbtFloat.cs" />
+    <Compile Include="Dependencies\fNbt\Tags\NbtInt.cs" />
+    <Compile Include="Dependencies\fNbt\Tags\NbtIntArray.cs" />
+    <Compile Include="Dependencies\fNbt\Tags\NbtList.cs" />
+    <Compile Include="Dependencies\fNbt\Tags\NbtLong.cs" />
+    <Compile Include="Dependencies\fNbt\Tags\NbtShort.cs" />
+    <Compile Include="Dependencies\fNbt\Tags\NbtString.cs" />
+    <Compile Include="Dependencies\fNbt\Tags\NbtTag.cs" />
+    <Compile Include="Dependencies\fNbt\ZLibStream.cs" />
     <Compile Include="Networking\MessageSender.cs" />
     <Compile Include="Networking\PacketHandler\PacketHandler.cs" />
     <Compile Include="Networking\PacketHandler\Packets\Handler.cs" />
     <Compile Include="Networking\PacketHandler\Packets\Handshake.cs" />
+    <Compile Include="Networking\PacketHandler\Packets\Ingoing\PlayerLook.cs" />
+    <Compile Include="Networking\PacketHandler\Packets\Ingoing\PlayerOnGround.cs" />
+    <Compile Include="Networking\PacketHandler\Packets\Outgoing\PlayerPositionAndLook.cs" />
     <Compile Include="Networking\PacketHandler\Packets\Ping.cs" />
     <Compile Include="Networking\PacketHandler\Packets\Outgoing\PlayerAbilities.cs" />
     <Compile Include="Networking\PacketHandler\Packets\PlayerPositionAndLook.cs" />
@@ -62,7 +145,7 @@
     <Compile Include="Utils\VarIntBitConverter.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Networking\PacketHandler\Packets\Ingoing\" />
+    <Compile Include="Networking\PacketHandler\Packets\Outgoing\MapChunkBulk.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
