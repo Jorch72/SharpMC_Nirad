@@ -50,6 +50,7 @@
     <Compile Include="Networking\PacketHandler\Packets\Handler.cs" />
     <Compile Include="Networking\PacketHandler\Packets\Handshake.cs" />
     <Compile Include="Networking\PacketHandler\Packets\Ping.cs" />
+    <Compile Include="Networking\PacketHandler\Packets\Outgoing\PlayerAbilities.cs" />
     <Compile Include="Networking\PacketHandler\Packets\PlayerPositionAndLook.cs" />
     <Compile Include="Networking\PacketHandler\Packets\PlayerPosition.cs" />
     <Compile Include="Networking\TCPServer.cs" />
@@ -60,7 +61,9 @@
     <Compile Include="Utils\Positions.cs" />
     <Compile Include="Utils\VarIntBitConverter.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Networking\PacketHandler\Packets\Ingoing\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
