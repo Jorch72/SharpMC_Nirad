@@ -21,7 +21,7 @@ Used Library's
 
 Thanks to
 ==========
-A big thanks to <a href="http://wiki.vg/"Wiki.vg</a>.
+A big thanks to <a href="http://wiki.vg/">Wiki.vg</a>.
 
 Licensing
 =========
