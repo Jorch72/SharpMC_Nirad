@@ -27,6 +27,14 @@ namespace SharpMC
             Console.ResetColor();
         }
 
+		public static void WriteInfoLine(string Text)
+		{
+			Console.ForegroundColor = ConsoleColor.Green;
+			Console.Write("[INFO] ");
+			Console.ResetColor();
+			Console.Write(Text + "\n");
+		}
+
         public static void WriteErrorLine(string Text)
         {
             Console.ForegroundColor = ConsoleColor.Red;

@@ -19,10 +19,22 @@ namespace SharpMC.Utils
             else
             {
 				Globals.PlayerOnline++;
+				Globals.updateTitle ();
                 Globals.Players.Add(p);
                 return true;
             }
         }
+
+		public static bool isConnectedPlayer(TcpClient client)
+		{
+			foreach (Player i in Globals.Players) 
+			{
+				if (i.Client == client) {
+					return true;
+				}
+			}
+			return false;
+		}
 
         public static Player getPlayer(string UUID)
         {

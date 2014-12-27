@@ -1,12 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Networking/PacketHandler/Packets/Handshake.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Program.cs">
     <Files>
-      <File FileName="Networking/PacketHandler/Packets/Outgoing/ChatMessage.cs" Line="96" Column="96" />
-      <File FileName="Networking/PacketHandler/Packets/Handshake.cs" Line="74" Column="74" />
-      <File FileName="Networking/PacketHandler/Packets/Ping.cs" Line="26" Column="26" />
-      <File FileName="Networking/PacketHandler/Packets/Ingoing/PlayerLook.cs" Line="34" Column="34" />
-      <File FileName="Program.cs" Line="38" Column="38" />
+      <File FileName="WorldGeneration/Blocks/BlockClass.cs" Line="1" Column="1" />
+      <File FileName="WorldGeneration/Chunk.cs" Line="1" Column="1" />
+      <File FileName="WorldGeneration/FlatLandGenerator.cs" Line="1" Column="1" />
+      <File FileName="Program.cs" Line="64" Column="64" />
+      <File FileName="WorldGeneration/Blocks/Air.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

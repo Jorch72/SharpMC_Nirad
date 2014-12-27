@@ -32,7 +32,7 @@ namespace SharpMC
             ConsoleFunctions.WriteServerLine("Preparing server for connections...");
             Thread serverThread = new Thread(() => new Server().ListenForClients());
             serverThread.Start();
-            Console.Title = "SharpMC Server 1.0.0 - By Kennyvv/Wuppie";
+			Globals.updateTitle ();
         }
     }
 
@@ -42,14 +42,20 @@ namespace SharpMC
        // public static Thread _listenThread;
         public static int ProtocolVersion = 47;
         public static string ProtocolName = "1.8";
-        private static string Title = "SharpMC";
-        public static bool isDebug = false;
+        private static string Title = "SharpMC 1.0.0 by Wuppie - Active connections: @CONNECTIONS@ | Players Online: @ONLINEPLAYERS@";
+        public static bool isDebug = true;
 
-        public static string ServerMOTD = "SharpMC - By Kennyvv/Wuppie";
+		public static string ServerMOTD = "\\u00A74\\u00A7k!!\\u00A79\\u00A7lSharpMC\\u00A74\\u00A7k!! \\u00A76By Wuppie";
         public static int PlayerOnline = 0;
         public static int PlayersMax = 250;
         public static List<Player> Players = new List<Player>();
 		public static FlatLandGenerator Generator = new FlatLandGenerator();
+
+		public static void updateTitle()
+		{
+			string _title = Title.Replace ("@CONNECTIONS@", ActiveConnections.ToString()).Replace("@ONLINEPLAYERS@", PlayerOnline.ToString());
+			Console.Title = _title;
+		}
 
         public static int tovarint(int number)
         {
@@ -151,8 +157,8 @@ namespace SharpMC
             }
             set
             {
+				updateTitle ();
                 _ActiveConnections = value;
-                PlayerOnline = value;
               //  Console.Title = Title + " | Active connections: " + _ActiveConnections;
             }
         }

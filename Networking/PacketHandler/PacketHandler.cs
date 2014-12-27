@@ -10,7 +10,8 @@ namespace SharpMC.Networking.PacketHandler
     {
         public void HandlePacket(object Client, byte[] Data)
         {
-            int PacketSize = Data[0];
+			int PacketSize = Globals.v2Int32(Data, 0);
+			ConsoleFunctions.WriteDebugLine ("Packetsize: " + PacketSize.ToString());
             int PacketID = Data[1];
 
             switch (PacketID)
@@ -40,35 +41,10 @@ namespace SharpMC.Networking.PacketHandler
                     break;
 
                 default:
-                  //  Console.WriteLine("[WARNING] Unknown packet received! ('" + PacketID + "')");
-                    //Unknown packet received! ('" + PacketID + "')"
                     ConsoleFunctions.WriteWarningLine("Unknown packet received! ('" + PacketID + "')");
                     break;
             }
 
-            #region Old
-            //       LoadHandlers();
-       //     bool found = false;
-
-         //   int PacketSize = Data[0];
-           // int PacketID = Data[1];
-            //foreach(Handler i in PHandlers)
-            //{
-             //   Console.WriteLine("Handler PID: " + i.PacketID);
-               // Console.WriteLine("Our Packet ID: " + PacketID);
-                //if (i.PacketID == PacketID)
-               // {
-                 //   found = true;
-                   // i.Handle(Client, Data);
-                    //break;
-                //}
-            //}
-            //if (!found)
-            //{
-            //    Console.WriteLine("No handler found for PacketID: " + PacketID);
-            //    Console.WriteLine("Packet size: " + PacketSize);
-            //}
-            #endregion
         }
     }
 }

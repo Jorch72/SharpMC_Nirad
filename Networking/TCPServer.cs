@@ -19,8 +19,8 @@ namespace SharpMC.Networking
             {
                 TcpClient client = Globals._ServerListener.AcceptTcpClient();
                 ConsoleFunctions.WriteDebugLine("A new connection has been made!");
-                Globals.ActiveConnections++;
-
+				Globals.ActiveConnections++;
+				Globals.updateTitle ();
                 Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClientCommNew));
                 clientThread.Start(client);
             }
@@ -44,53 +44,7 @@ namespace SharpMC.Networking
                     if (bytesRead > 0)
                     {
                         ConsoleFunctions.WriteDebugLine("Packet received. Time: " + DateTime.Now.ToLocalTime());
-                        ConsoleFunctions.WriteDebugLine("Packet ID: " + message[1]);
-                        #region OldSwitch
-                        /*  switch (message[1])
-                        {
-                            case 0x00:
-                                Console.WriteLine("[DEBUG] 0x00 received!");
-                                // Console.WriteLine("Ping received! (" + message[1].ToString() + ")");
-                                Console.WriteLine("Length info: " + message[0] + "/" + message.Length);
-
-                                Console.Write("Type of request: ");
-                                if (message[0] == 15)
-                                {
-                                    Console.Write("Handshake \n");
-                                    Console.WriteLine("Protocol version: " + message[2]);
-                                    string Host = Encoding.UTF8.GetString(message, 4, message[3]);
-                                    ushort actualPort;
-                                    if (BitConverter.IsLittleEndian)
-                                        actualPort = BitConverter.ToUInt16(new byte[2] { (byte)message[14], (byte)message[13] }, 0);
-                                    else
-                                        actualPort = BitConverter.ToUInt16(new byte[2] { (byte)message[13], (byte)message[14] }, 0);
-                                    Console.WriteLine("Server adress: " + Host + ":" + actualPort.ToString());
-                                    Console.WriteLine("Next state: " + message[16]);
-                                }
-                                else if (message[0] == 1)
-                                {
-                                    Console.WriteLine("Status request \n");
-                                   // StatusResponse(tcpClient, message);
-                                }
-                                else
-                                {
-                                    Console.WriteLine("WTF?! 0x00 with a length of: " + message[0]);
-                                }
-                                Console.WriteLine();
-
-                                break;
-                            case 0x01:
-                                Networking.Network.SendResponse(tcpClient, message);
-                                Console.WriteLine("[DEBUG] 0x01 received!");
-                                // Console.WriteLine("Ping package received! (" + message[1].ToString() + ")");
-                                Console.WriteLine("Length info: " + message[0] + "/" + message.Length);
-                                break;
-                            default:
-                                Console.WriteLine("Unknown packet! Ignoring! (" + message[1].ToString() + ")");
-                                break;
-                        }
-                       * */
-                        #endregion
+						ConsoleFunctions.WriteDebugLine("Packet ID: " + Globals.v2Int32(message, 1));
 
                         PacketHandler.PacketHandler PH = new PacketHandler.PacketHandler();
                         Thread handler = new Thread(() => PH.HandlePacket(tcpClient, message));
@@ -110,8 +64,17 @@ namespace SharpMC.Networking
                 }
                 
             }
-            Globals.ActiveConnections--;
+			ConsoleFunctions.WriteDebugLine ("A client disconnected!");
+			if (Utils.PlayerHelper.isConnectedPlayer (tcpClient)) 
+			{
+				ConsoleFunctions.WriteInfoLine("Player '" + Utils.PlayerHelper.getPlayer(tcpClient).Username + "' disconnected!");
+				Globals.Players.Remove (Utils.PlayerHelper.getPlayer (tcpClient));
+				Globals.PlayerOnline--;
+				Globals.updateTitle ();
+			}
             tcpClient.Close();
+			Globals.ActiveConnections--;
+			Globals.updateTitle ();
         }
 
     }
