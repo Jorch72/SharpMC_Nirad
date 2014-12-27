@@ -75,6 +75,7 @@
     <Compile Include="Data\Vector3.cs" />
     <Compile Include="WorldGeneration\FlatLandGenerator.cs" />
     <Compile Include="Data\Vector2.cs" />
+    <Compile Include="Networking\PacketHandler\Packets\Ingoing\ChatMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Networking\PacketHandler\Packets\Outgoing\MapChunkBulk.cs" />

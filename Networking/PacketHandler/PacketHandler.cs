@@ -22,8 +22,11 @@ namespace SharpMC.Networking.PacketHandler
                     new Handshake().Handle(Client, Data);
                     break;
 
-                case 0x01:
-                    new Ping().Handle(Client, Data);
+				case 0x01:
+					if (PacketSize == 9)
+						new Ping ().Handle (Client, Data);
+					else
+						new SharpMC.Networking.PacketHandler.Packets.Ingoing.ChatMessage().Handle (Client, Data);
                     break;
 
                 case 0x04:
