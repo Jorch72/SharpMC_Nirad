@@ -7,13 +7,11 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using Craft.Net.TerrainGeneration;
 
 namespace SharpMC
 {
     class Program
     {
-      //  static Server srv = new Server();
         static void Main(string[] args)
         {
             Console.WriteLine("#############################");
@@ -24,11 +22,13 @@ namespace SharpMC
             ConsoleFunctions.WriteServerLine("Loading important stuf...");
 
             #region WorldGeneration
-            Globals.Generator.Initialize(Globals.mainLVL);
-            Globals.Generator.GenerateChunk(new Craft.Net.Common.Coordinates2D(0, 0));
+			 /*
+			  * We need to have some nice world generation shit here.
+			  * I have to implement this tho... ;(
+			  */
             #endregion
 
-            ConsoleFunctions.WriteServerLine("Starting TCP Server...");
+            ConsoleFunctions.WriteServerLine("Preparing server for connections...");
             Thread serverThread = new Thread(() => new Server().ListenForClients());
             serverThread.Start();
 
@@ -49,8 +49,6 @@ namespace SharpMC
         public static int PlayerOnline = 0;
         public static int PlayersMax = 250;
         public static List<Player> Players = new List<Player>();
-        public static FlatlandGenerator Generator = new FlatlandGenerator();
-        public static Craft.Net.Anvil.Level mainLVL = new Craft.Net.Anvil.Level();
         public static int tovarint(int number)
         {
             int returnValue = 0;
