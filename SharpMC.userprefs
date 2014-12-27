@@ -1,10 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Utils/PlayerHelper.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Networking/PacketHandler/Packets/Handshake.cs">
     <Files>
-      <File FileName="Utils/PlayerHelper.cs" Line="14" Column="14" />
-      <File FileName="Program.cs" Line="7" Column="7" />
-      <File FileName="Networking/PacketHandler/PacketHandler.cs" Line="40" Column="40" />
+      <File FileName="Networking/PacketHandler/Packets/Outgoing/ChatMessage.cs" Line="96" Column="96" />
+      <File FileName="Networking/PacketHandler/Packets/Handshake.cs" Line="74" Column="74" />
+      <File FileName="Networking/PacketHandler/Packets/Ping.cs" Line="26" Column="26" />
+      <File FileName="Networking/PacketHandler/Packets/Ingoing/PlayerLook.cs" Line="34" Column="34" />
+      <File FileName="Program.cs" Line="38" Column="38" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -96,6 +96,7 @@ namespace SharpMC.Networking.PacketHandler.Packets
             SpawnPositionResponse(tcpClient, Data);
             new Outgoing.PlayerAbilities().Handle(tcpClient, Data);
             new Outgoing.PlayerPositionAndLook().Handle(tcpClient, Data);
+
         }
 
 		/*

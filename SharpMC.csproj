@@ -70,6 +70,17 @@
     <Compile Include="Utils\PlayerHelper.cs" />
     <Compile Include="Utils\Positions.cs" />
     <Compile Include="Utils\VarIntBitConverter.cs" />
+    <Compile Include="Networking\PacketHandler\Packets\Outgoing\ChatMessage.cs" />
+    <Compile Include="WorldGeneration\Blocks\BlockClass.cs" />
+    <Compile Include="WorldGeneration\Blocks\Grass.cs" />
+    <Compile Include="WorldGeneration\Blocks\Dirt.cs" />
+    <Compile Include="WorldGeneration\Blocks\Stone.cs" />
+    <Compile Include="WorldGeneration\Blocks\Bedrock.cs" />
+    <Compile Include="WorldGeneration\Blocks\Air.cs" />
+    <Compile Include="WorldGeneration\Chunk.cs" />
+    <Compile Include="Data\Vector3.cs" />
+    <Compile Include="WorldGeneration\FlatLandGenerator.cs" />
+    <Compile Include="Data\Vector2.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Networking\PacketHandler\Packets\Outgoing\MapChunkBulk.cs" />
@@ -84,5 +95,6 @@
   -->
   <ItemGroup>
     <Folder Include="WorldGeneration\" />
+    <Folder Include="WorldGeneration\Blocks\" />
   </ItemGroup>
 </Project>

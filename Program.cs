@@ -31,7 +31,6 @@ namespace SharpMC
             ConsoleFunctions.WriteServerLine("Preparing server for connections...");
             Thread serverThread = new Thread(() => new Server().ListenForClients());
             serverThread.Start();
-
             Console.Title = "SharpMC Server 1.0.0 - By Kennyvv/Wuppie";
         }
     }

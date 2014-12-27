@@ -16,7 +16,7 @@ namespace SharpMC.Networking.PacketHandler.Packets.Ingoing
         }
         public override void Handle(object Client, byte[] Data)
         {
-            
+
            //bool OnGround = BitConverter.ToBoolean(Data, 2);
             /*
              * Todo: Receive data.... (PlayerLook Packer)
