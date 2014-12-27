@@ -15,10 +15,6 @@ namespace SharpMC
 
 	public class BlockClass
 	{
-		public BlockClass ()
-		{
-		}
-
 		public int BlockID { get; set; }
 		public string Name { get; set; }
 		public BlockType Type { get; set; }

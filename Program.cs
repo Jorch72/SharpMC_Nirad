@@ -26,6 +26,7 @@ namespace SharpMC
 			  * We need to have some nice world generation shit here.
 			  * I have to implement this tho... ;(
 			  */
+			Globals.Generator.GenerateChunk(new Vector2(0,0));
             #endregion
 
             ConsoleFunctions.WriteServerLine("Preparing server for connections...");
@@ -48,6 +49,8 @@ namespace SharpMC
         public static int PlayerOnline = 0;
         public static int PlayersMax = 250;
         public static List<Player> Players = new List<Player>();
+		public static FlatLandGenerator Generator = new FlatLandGenerator();
+
         public static int tovarint(int number)
         {
             int returnValue = 0;

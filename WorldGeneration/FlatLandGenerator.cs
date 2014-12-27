@@ -17,7 +17,7 @@ namespace SharpMC
 			{
 				while (yDone < 16) 
 				{
-					i.SetBlock (new Vector3 (xDone, yDone, 0), new Dirt ());
+					i.SetBlock (new Vector3 (xDone, yDone, 0), new Blocks.Dirt ());
 					yDone++;
 				}
 				xDone++;

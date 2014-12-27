@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SharpMC
+namespace SharpMC.Blocks
 {
 	public class Bedrock : BlockClass
 	{
