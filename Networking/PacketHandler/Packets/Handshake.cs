@@ -38,7 +38,7 @@ namespace SharpMC.Networking.PacketHandler.Packets
 					 * If the handshake state is 1 then we know we have to handle a status request.
 					 * If the handshake state is 2 then we know we have to handle a login request.
 					 */ 
-                    int HandShakeState = Globals.v2Int32(Data, 15);
+                    int HandShakeState = Globals.v2Int32(Data, 15)[0];
 					
                     if (HandShakeState == 1)
                     {

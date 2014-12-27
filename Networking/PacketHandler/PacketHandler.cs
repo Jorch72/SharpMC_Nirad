@@ -10,9 +10,11 @@ namespace SharpMC.Networking.PacketHandler
     {
         public void HandlePacket(object Client, byte[] Data)
         {
-			int PacketSize = Globals.v2Int32(Data, 0);
-			ConsoleFunctions.WriteDebugLine ("Packetsize: " + PacketSize.ToString());
-            int PacketID = Data[1];
+			int[] _INT = Globals.v2Int32 (Data, 0);
+			int PacketSize = _INT[0];
+			int NextData = _INT[1];
+			ConsoleFunctions.WriteDebugLine ("Packetsize: " + PacketSize.ToString() + " Next data: " + NextData.ToString());
+			int PacketID = Globals.v2Int32(Data, NextData)[0];
 
             switch (PacketID)
             {

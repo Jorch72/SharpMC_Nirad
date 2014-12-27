@@ -163,7 +163,7 @@ namespace SharpMC
             }
         }
 
-        public static int v2Int32(byte[] Data, int startIndex)
+        public static int[] v2Int32(byte[] Data, int startIndex)
         {
             
             int shift = 0;
@@ -177,7 +177,10 @@ namespace SharpMC
                 if ((k & 0x80) != 128) break;
                 shift += 7;   
             }
-            return i;
+			int[] Result = new int[2];
+			Result [0] = i;
+			Result [1] = shift +1;
+            return Result;
         }
 
 

@@ -44,7 +44,7 @@ namespace SharpMC.Networking
                     if (bytesRead > 0)
                     {
                         ConsoleFunctions.WriteDebugLine("Packet received. Time: " + DateTime.Now.ToLocalTime());
-						ConsoleFunctions.WriteDebugLine("Packet ID: " + Globals.v2Int32(message, 1));
+						ConsoleFunctions.WriteDebugLine("Packet ID: " + Globals.v2Int32(message, 1)[0]);
 
                         PacketHandler.PacketHandler PH = new PacketHandler.PacketHandler();
                         Thread handler = new Thread(() => PH.HandlePacket(tcpClient, message));
