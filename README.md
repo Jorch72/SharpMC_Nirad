@@ -4,12 +4,24 @@ This is my test project, currently in heavy development.<Br>
 The code is pretty **** messy. But oh well, it works :P<br>
 Hopefully i'll get more work done soon :)<br>
 
+Functions
+=================
+Protocol: 47
+World Format: Planned
+Multiworld: Planned
+Physics: Planned
+Entities: Planned
+Scripting: Planned - C# plugin system
+Platforms: Windows. Mac & Linux using Mono.
+
+
 Used Library's
 ==============
-I try not to use them, but sometimes i kinda have too haha.
-- <a href="https://github.com/SirCmpwn/Craft.Net">Craft.net</a> - For terrain generation and chunk management.
-- <a href="https://github.com/fragmer/fNbt">fNbt</a> - Dependency for Craft.net
-- <a href="http://www.bouncycastle.org/csharp/">BouncyCastle</a> - Dependency for Craft.net & Encryption on Mono.
+- None!
+
+Thanks to
+==========
+A big thanks to <a href="http://wiki.vg/"Wiki.vg</a>.
 
 Licensing
 =========
