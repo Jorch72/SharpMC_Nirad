@@ -6,13 +6,13 @@ Hopefully i'll get more work done soon :)<br>
 
 Functions
 =================
-Protocol: 47
-World Format: Planned
-Multiworld: Planned
-Physics: Planned
-Entities: Planned
-Scripting: Planned - C# plugin system
-Platforms: Windows. Mac & Linux using Mono.
+Protocol: 47<br>
+World Format: Planned<br>
+Multiworld: Planned<br>
+Physics: Planned<br>
+Entities: Planned<br>
+Scripting: Planned - C# plugin system<br>
+Platforms: Windows. Mac & Linux using Mono.<br>
 
 
 Used Library's
