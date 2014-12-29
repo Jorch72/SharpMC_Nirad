@@ -57,37 +57,6 @@ namespace SharpMC
 			Console.Title = _title;
 		}
 
-        public static int tovarint(int number)
-        {
-            int returnValue = 0;
-            bool exit = false;
-
-            while (!exit)
-            {
-                double digit = number % 128;
-                if (digit == number)
-                {
-                    exit = true;
-                }
-                else
-                {
-                    number = number / 128;
-                    digit += 128;
-                }
-                returnValue += (char)digit;
-            }
-            return returnValue;
-        }
-
-        public static string reverse(string a)
-        {
-            string temp = "";
-            int i, j;
-            for (j = 0, i = a.Length - 1; i >= 0; i--, j++)
-                temp += a[i];
-            return temp;
-        }
-
         public static string jsonEncode(string text)
         {
             StringBuilder result = new StringBuilder();
@@ -104,23 +73,6 @@ namespace SharpMC
                 }
             }
             return result.ToString();
-        }
-
-        public int readNextVarInt()
-        {
-            int i = 0;
-            int j = 0;
-            int k = 0;
-            byte[] tmp = new byte[1];
-            while (true)
-            {
-              //  Receive(tmp, 0, 1, SocketFlags.None);
-                k = tmp[0];
-                i |= (k & 0x7F) << j++ * 7;
-                if (j > 5) throw new OverflowException("VarInt too big");
-                if ((k & 0x80) != 128) break;
-            }
-            return i;
         }
 
         public static byte[] getVarInt(int paramInt)
@@ -179,7 +131,7 @@ namespace SharpMC
             }
 			int[] Result = new int[2];
 			Result [0] = i;
-			Result [1] = shift +1;
+			Result [1] = startIndex + shift + 1;
             return Result;
         }
 

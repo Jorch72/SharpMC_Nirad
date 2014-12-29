@@ -24,12 +24,19 @@ namespace SharpMC.Networking.PacketHandler.Packets
 				 * I know Host and ActualPort are currently not used.
 				 * I will use them to verify people are not using a proxy later on.
 				 */ 
-                string Host = Encoding.UTF8.GetString(Data, 4, Data[3]);
+            int[] _Hostdata = Globals.v2Int32(Data, 3);
+            int HostLength = _Hostdata[0];
+            int NextData = _Hostdata[1];
+
+            string Host = Encoding.UTF8.GetString(Data, NextData, HostLength);
+
                 ushort actualPort;
                 if (BitConverter.IsLittleEndian)
                     actualPort = BitConverter.ToUInt16(new byte[2] { (byte)Data[14], (byte)Data[13] }, 0);
                 else
                     actualPort = BitConverter.ToUInt16(new byte[2] { (byte)Data[13], (byte)Data[14] }, 0);
+
+
                 try
                 {
 					/*
@@ -67,12 +74,21 @@ namespace SharpMC.Networking.PacketHandler.Packets
 			 * We need to get the username another way than Hardcode it in...
 			 * I don't see where to get it from at the moment tho :S
 			 */
+
+            int[] UsernameStuff = Globals.v2Int32(Data, 2);
+            int _UsernameLength = UsernameStuff[0];
+            int NextIndex = UsernameStuff[1];
+            ConsoleFunctions.WriteDebugLine("Username length: " + _UsernameLength + " | Next index: " + NextIndex);
+            string uName = Encoding.UTF8.GetString(Data, NextIndex +1, _UsernameLength);
+            ConsoleFunctions.WriteDebugLine("Username: " + uName);
+
+
             string Username = "kennyvv";
             byte[] _Username = Encoding.UTF8.GetBytes(Username);
 
 			//We grab the UUID for the Username.
             string UUID = Globals.getUUID(Username);
-            Guid g = Guid.Parse(UUID);
+            Guid g = new Guid(UUID);
             UUID = g.ToString();
 			byte[] _UUID = Encoding.UTF8.GetBytes(UUID);
 			byte[] PacketID = Globals.getVarInt(0x02);
