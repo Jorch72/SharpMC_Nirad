@@ -8,6 +8,6 @@ namespace SharpMC.Networking.PacketHandler.Packets
     class Handler
     {
         public int PacketID { get; set; }
-        public virtual void Handle(object Client, byte[] Data) {  }
+        public virtual void Handle(ClientWrapper Client, byte[] Data) {  }
     }
 }

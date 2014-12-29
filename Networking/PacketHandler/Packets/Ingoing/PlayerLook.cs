@@ -14,7 +14,7 @@ namespace SharpMC.Networking.PacketHandler.Packets.Ingoing
                 return 0x05;
             }
         }
-        public override void Handle(object Client, byte[] Data)
+        public override void Handle(ClientWrapper Client, byte[] Data)
         {
 
            //bool OnGround = BitConverter.ToBoolean(Data, 2);

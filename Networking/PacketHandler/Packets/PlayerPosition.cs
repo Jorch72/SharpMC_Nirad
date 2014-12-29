@@ -15,7 +15,7 @@ namespace SharpMC.Networking.PacketHandler.Packets
             }
         }
 
-        public override void Handle(object Client, byte[] Data)
+        public override void Handle(ClientWrapper Client, byte[] Data)
         {
             int DataLength = Globals.v2Int32(Data, 1)[0];
             double X = BitConverter.ToDouble(Data, 2);

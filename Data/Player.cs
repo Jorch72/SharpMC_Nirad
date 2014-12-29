@@ -13,7 +13,7 @@ namespace SharpMC.Data
         public string UUID { get; set; }
         public Position Position { get; set; }
         public Gamemode Gamemode { get; set; }
-		public TcpClient Client { get; set; }
+		public ClientWrapper Client { get; set; }
 
         public Player()
         {

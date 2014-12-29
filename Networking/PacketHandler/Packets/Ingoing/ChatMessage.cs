@@ -15,7 +15,7 @@ namespace SharpMC.Networking.PacketHandler.Packets.Ingoing
 			}
 		}
 
-		public override void Handle(object Client, byte[] Data)
+		public override void Handle(ClientWrapper Client, byte[] Data)
 		{
 			/*
 			 * We should handle chat messages here :)

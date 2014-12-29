@@ -15,7 +15,7 @@ namespace SharpMC.Networking.PacketHandler.Packets.Outgoing
                 return 0x39;
             }
         }
-        public override void Handle(object Client, byte[] Data)
+        public override void Handle(ClientWrapper Client, byte[] Data)
         {
             byte[] _PacketID = Globals.getVarInt(PacketID);
             byte[] _Flags = new byte[1];
@@ -26,7 +26,7 @@ namespace SharpMC.Networking.PacketHandler.Packets.Outgoing
 
             byte[] TotalSize = Globals.getVarInt(_PacketID.Length + _Flags.Length + FlyinSpeed.Length + WalkinSpeed.Length);
             byte[] ToSend = Globals.concatBytes(TotalSize, _PacketID, _Flags, FlyinSpeed, WalkinSpeed);
-            Network.SendResponse((TcpClient)Client, ToSend);
+            Network.SendResponse(Client, ToSend);
         }
     }
 }

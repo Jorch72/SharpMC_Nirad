@@ -15,7 +15,7 @@ namespace SharpMC.Networking.PacketHandler.Packets.Outgoing
                 return 0x02;
             }
         }
-        public override void Handle(object Client, byte[] Data)
+        public override void Handle(ClientWrapper Client, byte[] Data)
         {
 			string Message = "Hello world";
 			Message = "{ \"text\": \"" + Message + "\" }";
@@ -26,7 +26,7 @@ namespace SharpMC.Networking.PacketHandler.Packets.Outgoing
 
 			byte[] ToSend = Globals.concatBytes (_Size, _PacketID, _MSGLength, _Message);
 
-			Network.SendResponse ((TcpClient)Client, ToSend);
+			Network.SendResponse (Client, ToSend);
             /*
              * Package seems to be bugged....
              * This needs to be fixed :>

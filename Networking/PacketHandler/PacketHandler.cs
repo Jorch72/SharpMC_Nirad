@@ -10,6 +10,7 @@ namespace SharpMC.Networking.PacketHandler
     {
         public void HandlePacket(object Client, byte[] Data)
         {
+            ClientWrapper cWrapper = (ClientWrapper)Client;
 			int[] _INT = Globals.v2Int32 (Data, 0);
 			int PacketSize = _INT[0];
 			int NextData = _INT[1];
@@ -19,30 +20,30 @@ namespace SharpMC.Networking.PacketHandler
             switch (PacketID)
             {
                 case 0x00:
-                    new Handshake().Handle(Client, Data);
+                    new Handshake().Handle(cWrapper, Data);
                     break;
 
 				case 0x01:
 					if (PacketSize == 9)
-						new Ping ().Handle (Client, Data);
+						new Ping ().Handle (cWrapper, Data);
 					else
-						new SharpMC.Networking.PacketHandler.Packets.Ingoing.ChatMessage().Handle (Client, Data);
+						new SharpMC.Networking.PacketHandler.Packets.Ingoing.ChatMessage().Handle (cWrapper, Data);
                     break;
 
                 case 0x04:
-                    new PlayerPosition().Handle(Client, Data);
+                    new PlayerPosition().Handle(cWrapper, Data);
                     break;
 
                 case 0x06:
-                    new PlayerPositionAndLook().Handle(Client, Data);
+                    new PlayerPositionAndLook().Handle(cWrapper, Data);
                     break;
 
                 case 0x03:
-                    new SharpMC.Networking.PacketHandler.Packets.Ingoing.PlayerOnGround().Handle(Client, Data);
+                    new SharpMC.Networking.PacketHandler.Packets.Ingoing.PlayerOnGround().Handle(cWrapper, Data);
                     break;
 
                 case 0x05:
-                    new SharpMC.Networking.PacketHandler.Packets.Ingoing.PlayerLook().Handle(Client, Data);
+                    new SharpMC.Networking.PacketHandler.Packets.Ingoing.PlayerLook().Handle(cWrapper, Data);
                     break;
 
                 default:

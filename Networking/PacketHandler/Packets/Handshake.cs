@@ -17,9 +17,9 @@ namespace SharpMC.Networking.PacketHandler.Packets
                 return 0x00;
             }
         }
-        public override void Handle(object Client, byte[] Data)
+        public override void Handle(ClientWrapper Client, byte[] Data)
         {
-              TcpClient tcpClient = (TcpClient)Client;
+            ClientWrapper tcpClient = Client;
 				/*
 				 * I know Host and ActualPort are currently not used.
 				 * I will use them to verify people are not using a proxy later on.
@@ -57,6 +57,11 @@ namespace SharpMC.Networking.PacketHandler.Packets
                         ConsoleFunctions.WriteDebugLine("Handling Login Request!");
                         LoginRequest(tcpClient, Data);
                     }
+                    else
+                    {
+                        ConsoleFunctions.WriteDebugLine("We received an unknown Handshake state! WTF \nStopping");
+                        return;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -68,18 +73,22 @@ namespace SharpMC.Networking.PacketHandler.Packets
                 }
         }
 
-        private void LoginRequest(TcpClient tcpClient, byte[] Data)
+        private void LoginRequest(ClientWrapper tcpClient, byte[] Data)
         {   
 			/*
 			 * We need to get the username another way than Hardcode it in...
 			 * I don't see where to get it from at the moment tho :S
 			 */
 
-            int[] UsernameStuff = Globals.v2Int32(Data, 2);
+            /*
+                Oops this code below was published accidentaly!
+                I was checking for a way i can retrieve the username. Still seems bugged tho, really strange.
+            */
+            int[] UsernameStuff = Globals.v2Int32(Data, 3);
             int _UsernameLength = UsernameStuff[0];
             int NextIndex = UsernameStuff[1];
             ConsoleFunctions.WriteDebugLine("Username length: " + _UsernameLength + " | Next index: " + NextIndex);
-            string uName = Encoding.UTF8.GetString(Data, NextIndex +1, _UsernameLength);
+            string uName = Encoding.UTF8.GetString(Data, NextIndex, _UsernameLength);
             ConsoleFunctions.WriteDebugLine("Username: " + uName);
 
 
@@ -118,7 +127,7 @@ namespace SharpMC.Networking.PacketHandler.Packets
 		/*
 		 * This functions sends a packet to turn off compression.
 		 */
-        private void CompressionLevel(TcpClient tcpClient, byte[] Data)
+        private void CompressionLevel(ClientWrapper tcpClient, byte[] Data)
         {
             byte[] PacketID = Globals.getVarInt(0x46);
             byte[] compressionLVL = Globals.getVarInt(-1);
@@ -133,7 +142,7 @@ namespace SharpMC.Networking.PacketHandler.Packets
 		 * But for now i guess this is the best way for me to do it.
 		 * Let's hope it works :P
 		 */
-        private void PlayResponse(TcpClient tcpClient, byte[] Data)
+        private void PlayResponse(ClientWrapper tcpClient, byte[] Data)
         {
 			//Get the packet ID
             byte[] PacketID = Globals.getVarInt(0x01);
@@ -167,7 +176,7 @@ namespace SharpMC.Networking.PacketHandler.Packets
             Network.SendResponse(tcpClient, Send);
         }
 
-        private void StatusResponse(TcpClient tcpClient, byte[] message)
+        private void StatusResponse(ClientWrapper tcpClient, byte[] message)
         {
             //HWID : d38d0d94-032a-40e3-b6bf-fa3edd570d5c
             string json = "{\"version\": {\"name\": \"" + Globals.ProtocolName + "\",\"protocol\": " + Globals.ProtocolVersion.ToString() + "},\"players\": {\"max\": " + Globals.PlayersMax + ",\"online\": " + Globals.PlayerOnline + "},\"description\": {\"text\":\"" + Globals.ServerMOTD + "\"}, \"favicon\": \"data:image/png;base64,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\"}";
@@ -183,7 +192,7 @@ namespace SharpMC.Networking.PacketHandler.Packets
 
         }
 
-        private void SpawnPositionResponse(TcpClient tcpClient, byte[] Data)
+        private void SpawnPositionResponse(ClientWrapper tcpClient, byte[] Data)
         {
             byte[] PacketID = Globals.getVarInt(0x05);
             long XYZ = Positions.getPositionStructure(0, 0, 50);

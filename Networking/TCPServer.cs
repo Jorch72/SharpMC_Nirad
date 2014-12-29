@@ -30,6 +30,7 @@ namespace SharpMC.Networking
         {
             TcpClient tcpClient = (TcpClient)client;
             NetworkStream clientStream = tcpClient.GetStream();
+            ClientWrapper Client = new ClientWrapper(tcpClient);
 
             //Buffer size of 4096 Bytes, reason: I guess we don't need more?
             byte[] message = new byte[4096];
@@ -47,7 +48,7 @@ namespace SharpMC.Networking
 						ConsoleFunctions.WriteDebugLine("Packet ID: " + Globals.v2Int32(message, 1)[0]);
 
                         PacketHandler.PacketHandler PH = new PacketHandler.PacketHandler();
-                        Thread handler = new Thread(() => PH.HandlePacket(tcpClient, message));
+                        Thread handler = new Thread(() => PH.HandlePacket(Client, message));
                         handler.Start();
 
                     }
@@ -65,10 +66,10 @@ namespace SharpMC.Networking
                 
             }
 			ConsoleFunctions.WriteDebugLine ("A client disconnected!");
-			if (Utils.PlayerHelper.isConnectedPlayer (tcpClient)) 
+			if (Utils.PlayerHelper.isConnectedPlayer (Client)) 
 			{
-				ConsoleFunctions.WriteInfoLine("Player '" + Utils.PlayerHelper.getPlayer(tcpClient).Username + "' disconnected!");
-				Globals.Players.Remove (Utils.PlayerHelper.getPlayer (tcpClient));
+				ConsoleFunctions.WriteInfoLine("Player '" + Utils.PlayerHelper.getPlayer(Client).Username + "' disconnected!");
+				Globals.Players.Remove (Utils.PlayerHelper.getPlayer (Client));
 				Globals.PlayerOnline--;
 				Globals.updateTitle ();
 			}

@@ -15,11 +15,10 @@ namespace SharpMC.Networking.PacketHandler.Packets
                 return 0x01;
             }
         }
-        public override void Handle(object Client, byte[] Data)
+        public override void Handle(ClientWrapper Client, byte[] Data)
         {
             ConsoleFunctions.WriteDebugLine("Handling PING Request!");
-            TcpClient client = (TcpClient)Client;
-            Network.SendResponse(client, Data);
+            Network.SendResponse(Client, Data);
         }
     }
 }

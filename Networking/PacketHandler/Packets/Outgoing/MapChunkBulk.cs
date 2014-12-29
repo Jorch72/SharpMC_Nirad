@@ -15,7 +15,7 @@ namespace SharpMC.Networking.PacketHandler.Packets.Outgoing
                 return 0x26;
             }
         }
-        public override void Handle(object Client, byte[] Data)
+        public override void Handle(ClientWrapper Client, byte[] Data)
         {
 			/*
              *	I have no idea howto do the world generation! :(

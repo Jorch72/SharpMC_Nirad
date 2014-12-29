@@ -25,7 +25,7 @@ namespace SharpMC.Utils
             }
         }
 
-		public static bool isConnectedPlayer(TcpClient client)
+		public static bool isConnectedPlayer(ClientWrapper client)
 		{
 			foreach (Player i in Globals.Players) 
 			{
@@ -48,7 +48,7 @@ namespace SharpMC.Utils
             return getFromPlayerFile(UUID);
         }
 
-		public static Player getPlayer(TcpClient client)
+		public static Player getPlayer(ClientWrapper client)
 		{
 			foreach (Player i in Globals.Players) 
 			{

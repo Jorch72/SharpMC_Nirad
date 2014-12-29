@@ -8,7 +8,7 @@ namespace SharpMC.Networking
 {
     class Network
     {
-        public static void SendResponse(TcpClient tcpClient, byte[] Data)
+        public static void SendResponse(ClientWrapper tcpClient, byte[] Data)
         {
          //   List<byte> actData = new List<byte>(Data[0] + 1);
            // for (int i = 0; i < (Data[0] + 1); i++)
@@ -17,8 +17,8 @@ namespace SharpMC.Networking
            // }
             try
             {
-                tcpClient.NoDelay = false;
-                NetworkStream clientStream = tcpClient.GetStream();
+                tcpClient.Client.NoDelay = false;
+                NetworkStream clientStream = tcpClient.Client.GetStream();
 
                 clientStream.Write(Data, 0, Data.Length);
                 clientStream.Flush();
