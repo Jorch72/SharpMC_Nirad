@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.IO;
 
 namespace SharpMC.Networking.PacketHandler.Packets
 {
@@ -91,7 +92,9 @@ namespace SharpMC.Networking.PacketHandler.Packets
             string uName = Encoding.UTF8.GetString(Data, NextIndex, _UsernameLength);
             ConsoleFunctions.WriteDebugLine("Username: " + uName);
 
-
+            /*
+             * Yes, this is still hardcoded... I still didn't find the problem...
+             */
             string Username = "kennyvv";
             byte[] _Username = Encoding.UTF8.GetBytes(Username);
 
@@ -102,11 +105,29 @@ namespace SharpMC.Networking.PacketHandler.Packets
 			byte[] _UUID = Encoding.UTF8.GetBytes(UUID);
 			byte[] PacketID = Globals.getVarInt(0x02);
 			byte[] UUIDLength = Globals.getVarInt(_UUID.Length);
-
+            Player _Player;
 			//We create new player data.
 			//This is the data we can retrieve later on using the PlayerHelper class.
-			SharpMC.Utils.PlayerHelper.addPlayer(new Player() { Username = Username, UUID = UUID, Gamemode = new Gamemode() { _Gamemode = 1 }, Position = new Position() { X = 0, Y = 0, Z = 50}, Client = tcpClient });
-		
+            try
+            {
+                try
+                {
+                    _Player = Utils.PlayerHelper.getPlayer(UUID);
+                }
+                catch(FileNotFoundException ex)
+                { 
+                    _Player = SharpMC.Utils.PlayerHelper.addPlayer(new Player() { Username = Username, UUID = UUID, Gamemode = new Gamemode() { _Gamemode = 1 }, Position = new Position() { X = 0, Y = 0, Z = 50}, Client = tcpClient });
+                }
+                _Player.Client = tcpClient;
+                _Player.SaveToFile();
+            }
+            catch(NotSupportedException ex)
+            {
+                //Seems we already added this user after all. WTF?!
+                //Then why didn't we find it? :O
+            }
+
+
             byte[] UsernameLength = Globals.getVarInt(_Username.Length);
             byte[] TotalLength = Globals.getVarInt(PacketID.Length + _UUID.Length + _Username.Length + UUIDLength.Length + UsernameLength.Length);
 

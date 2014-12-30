@@ -69,7 +69,8 @@ namespace SharpMC.Networking
 			if (Utils.PlayerHelper.isConnectedPlayer (Client)) 
 			{
 				ConsoleFunctions.WriteInfoLine("Player '" + Utils.PlayerHelper.getPlayer(Client).Username + "' disconnected!");
-				Globals.Players.Remove (Utils.PlayerHelper.getPlayer (Client));
+                Client._Player.SaveToFile();
+                Globals.Players.Remove (Utils.PlayerHelper.getPlayer (Client));
 				Globals.PlayerOnline--;
 				Globals.updateTitle ();
 			}

@@ -10,18 +10,18 @@ namespace SharpMC.Utils
 {
     class PlayerHelper
     {
-        public static bool addPlayer(Player p)
+        public static Player addPlayer(Player p)
         {
             if (Globals.Players.Contains(p))
             {
-                return false;
+                throw new NotSupportedException("This player is already added!");
             }
             else
             {
 				Globals.PlayerOnline++;
 				Globals.updateTitle ();
                 Globals.Players.Add(p);
-                return true;
+                return p;
             }
         }
 
@@ -73,12 +73,13 @@ namespace SharpMC.Utils
                 string _Username = Utils.Base64.Decode(Splitted[0]);
                 string _UUID = Utils.Base64.Decode(Splitted[1]);
                 long _Position = Utils.Base64.DecodeToLong(Splitted[2]);
-                Player _Player = new Player() { Username = _Username, UUID = _UUID, Position = new Position() { X = (int)Positions.GetX(_Position), Y = (int)Positions.GetY(_Position), Z = (int)Positions.GetZ(_Position) } };
+                int __Gamemode = Convert.ToInt32(Splitted[3]);
+                Player _Player = new Player() { Username = _Username, UUID = _UUID, Position = new Position() { X = (int)Positions.GetX(_Position), Y = (int)Positions.GetY(_Position), Z = (int)Positions.GetZ(_Position) }, Gamemode = new Gamemode(){ _Gamemode = __Gamemode} };
                 return _Player;
             }
             else
             {
-               return new Player() { Username = "Unknown", UUID = UUID, Gamemode = new Gamemode() { _Gamemode = 1 }, Position = new Position() { X = 0, Y = 0, Z = 50} };
+                throw new FileNotFoundException("No player found!");
             }
         }
     }

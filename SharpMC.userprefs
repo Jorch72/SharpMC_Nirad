@@ -1,21 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Networking/PacketHandler/Packets/Handshake.cs">
-    <Files>
-      <File FileName="WorldGeneration/Chunk.cs" Line="20" Column="20" />
-      <File FileName="WorldGeneration/FlatLandGenerator.cs" Line="1" Column="1" />
-      <File FileName="Program.cs" Line="4" Column="4" />
-      <File FileName="WorldGeneration/Blocks/Air.cs" Line="1" Column="1" />
-      <File FileName="Networking/TCPServer.cs" Line="1" Column="1" />
-      <File FileName="ConsoleFunctions.cs" Line="1" Column="1" />
-      <File FileName="Networking/PacketHandler/Packets/Handshake.cs" Line="38" Column="38" />
-      <File FileName="Utils/PlayerHelper.cs" Line="1" Column="1" />
-      <File FileName="Networking/PacketHandler/Packets/PlayerPosition.cs" Line="1" Column="1" />
-      <File FileName="Networking/PacketHandler/PacketHandler.cs" Line="27" Column="27" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches>
+    <Watch file="Networking/PacketHandler/Packets/Handshake.cs" line="32" offsetX="574" offsetY="465" expression="Data" liveUpdate="False" />
+  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
 </Properties>

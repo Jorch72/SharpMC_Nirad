@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SharpMC.Utils;
 
 namespace SharpMC.Networking.PacketHandler.Packets
 {
@@ -19,12 +20,16 @@ namespace SharpMC.Networking.PacketHandler.Packets
         {
             int DataLength = Globals.v2Int32(Data, 1)[0];
             double X = BitConverter.ToDouble(Data, 2);
-            double y = BitConverter.ToDouble(Data, 3);
-            double z = BitConverter.ToDouble(Data, 4);
-            bool onGround = BitConverter.ToBoolean(Data, 5);
+            double y = BitConverter.ToDouble(Data, 11);
+            double z = BitConverter.ToDouble(Data, 20);
+            bool onGround = BitConverter.ToBoolean(Data, 29);
 
+            if (Client._Player != null)
+                Client._Player.Position.setPosition((long)X, (long)y, (long)z);
             /* TODO:
-             * Save the received information...
+             * FIX THIS SHIT!@!@@#!
+             * 
+             * Maybe save onGround, however i don't think it is very important ATM.
             */
         }
 
