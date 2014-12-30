@@ -11,7 +11,7 @@ namespace SharpMC.Networking.PacketHandler.Packets
         {
             get
             {
-                return 0x04;
+                return 0x06;
             }
         }
 
@@ -19,12 +19,14 @@ namespace SharpMC.Networking.PacketHandler.Packets
         {
             int DataLength = Globals.v2Int32(Data, 1)[0];
             double X = BitConverter.ToDouble(Data, 2);
-            double y = BitConverter.ToDouble(Data, 3);
-            double z = BitConverter.ToDouble(Data, 4);
+            double y = BitConverter.ToDouble(Data, 11);
+            double z = BitConverter.ToDouble(Data, 19);
             float yaw = BitConverter.ToSingle(Data, 5);
             float pitch = BitConverter.ToSingle(Data, 6);
             bool onGround = BitConverter.ToBoolean(Data, 7);
 
+            if (Client._Player != null)
+                Client._Player.Position.setPosition(X, y, z);
             /* TODO:
              * Save the received information...
             */

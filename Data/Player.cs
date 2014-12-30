@@ -31,9 +31,9 @@ namespace SharpMC.Data
 
             string __Username = Utils.Base64.Encode(Username);
             string __UUID = Utils.Base64.Encode(UUID);
-            string __Position = Utils.Base64.Encode(Position.getPosition().ToString());
+           // string __Position = Utils.Base64.Encode(Position.getPosition().ToString());
             int __GameMode = Gamemode._Gamemode;
-            string FullString = __Username + "|" + __UUID + "|" + __Position + "|" + __GameMode;
+            string FullString = __Username + "|" + __UUID + "|" + Position.X + "|" + Position.Y + "|" + Position.Z + "|" + __GameMode;
 
            // if (!File.Exists("players/" + UUID + ".data"))
                // File.Create("players/" + UUID + ".data");

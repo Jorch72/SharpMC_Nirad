@@ -120,6 +120,7 @@ namespace SharpMC.Networking.PacketHandler.Packets
                 }
                 _Player.Client = tcpClient;
                 _Player.SaveToFile();
+                tcpClient._Player = _Player;
             }
             catch(NotSupportedException ex)
             {

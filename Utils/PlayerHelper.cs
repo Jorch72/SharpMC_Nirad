@@ -56,6 +56,7 @@ namespace SharpMC.Utils
 				{
 					return i;
 				}
+
 			}
 			throw new Exception ("We didn't find any player...");
 		}
@@ -72,11 +73,14 @@ namespace SharpMC.Utils
                 string[] Splitted = Data.Split('|');
                 string _Username = Utils.Base64.Decode(Splitted[0]);
                 string _UUID = Utils.Base64.Decode(Splitted[1]);
-                long _Position = Utils.Base64.DecodeToLong(Splitted[2]);
-                int __Gamemode = Convert.ToInt32(Splitted[3]);
-                Player _Player = new Player() { Username = _Username, UUID = _UUID, Position = new Position() { X = (int)Positions.GetX(_Position), Y = (int)Positions.GetY(_Position), Z = (int)Positions.GetZ(_Position) }, Gamemode = new Gamemode(){ _Gamemode = __Gamemode} };
+                double _X = Convert.ToDouble(Splitted[2]);
+                double _Y = Convert.ToDouble(Splitted[3]);
+                double _Z = Convert.ToDouble(Splitted[4]);
+                int __Gamemode = Convert.ToInt32(Splitted[5]);
+                Player _Player = new Player() { Username = _Username, UUID = _UUID, Position = new Position() { X = _X, Y = _Y, Z = _Z }, Gamemode = new Gamemode(){ _Gamemode = __Gamemode} };
                 return _Player;
             }
+
             else
             {
                 throw new FileNotFoundException("No player found!");

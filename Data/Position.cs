@@ -7,22 +7,22 @@ namespace SharpMC.Data
 {
     class Position
     {
-        public int X { get; set; }
-        public int Y { get; set; }
-        public int Z { get; set; }
+        public double X { get; set; }
+        public double Y { get; set; }
+        public double Z { get; set; }
 
-        public byte[] ToBytes()
+      /*  public byte[] ToBytes()
         {
             long pos = getPosition();
             byte[] Bytes = BitConverter.GetBytes(pos);
             return Bytes;
-        }
+        } */
 
-        public void setPosition(long x, long y, long z)
+        public void setPosition(double x, double y, double z)
         {
-            X = (int)x;
-            Y = (int)y;
-            Z = (int)z;
+            X = x;
+            Y = y;
+            Z = z;
         }
 
         public void setPosition(long val)
@@ -31,22 +31,26 @@ namespace SharpMC.Data
             long y = (val >> 26) & 0xFFF;
             long z = val << 38 >> 38;
 
-            X = (int)x;
-            Y = (int)y;
-            Z = (int)z;
+            X = x;
+            Y = y;
+            Z = z;
         }
 
-        private void FromBytes(byte[] Bytes)
-        {
-            long val = getPosition();
-            long x = val >> 38;
-            long y = (val >> 26) & 0xFFF;
-            long z = val << 38 >> 38;
-        }
+        /// <summary>
+        /// Gets the position to an int array.
+        /// </summary>
+        /// <returns>0 = X, 1 = Y, 2 = Z</returns>
+     //   public long[] getPositionToArray()
+      //  {
+     //       long[] Data = new long[3];
+     //       Data[1] = Y;
+     //       Data[2] = Z;
+       //     return Data;
+      //  }
 
         public long getPosition()
         {
-            long poop = ((X & 0x3FFFFFF) << 38) | ((Y & 0xFFF) << 26) | (Z & 0x3FFFFFF);
+            long poop = (((int)X & 0x3FFFFFF) << 38) | (((int)Y & 0xFFF) << 26) | ((int)Z & 0x3FFFFFF);
             return poop;
         }
     }
